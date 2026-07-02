@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Doctors
+{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+
+    <h2 class="text-center mb-5">
+        {{ category.name }} Doctors
+    </h2>
+    <div class="row">
+
+        {% for doctor in doctors %}
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card h-100 shadow">
+
+                <img src="{{ doctor.photo.url }}"class="card-img-top" style="height:250px;object-fit:cover;">
+
+                <div class="card-body text-center">
+
+                    <h4>
+                        <a href="{% url 'doctor_detail' doctor.id %}"
+                        class="text-decoration-none">
+                            {{ doctor.name }}
+                        </a>
+                    </h4>
+                    <p>{{ doctor.specialization }}</p>
+
+                    <p>
+                        <strong>{{ doctor.experience }}</strong>
+                        Years Experience
+                    </p>
+
+                    {% if doctor.is_available %}
+                        <span class="badge bg-success">
+                            Available
+                        </span>
+
+                        <a href="{% url 'doctor_detail' doctor.id %}"
+                        class="btn btn-outline-primary mt-3">
+                            View Profile
+                        </a>
+                    {% else %}
+                        <span class="badge bg-danger">
+                            Not Available
+                        </span>
+                        <a href="{% url 'doctor_detail' doctor.id %}"
+                        class="btn btn-outline-primary mt-3">
+                            View Profile
+                        </a>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <h4 class="text-center">
+            No doctors available.
+        </h4>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

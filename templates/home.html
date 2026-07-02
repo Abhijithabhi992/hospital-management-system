@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Hospital Management
+{% endblock %}
+
+{% block content %}
+
+<div class="container text-center mt-5">
+
+    <h1 class="display-4 fw-bold">
+        Welcome to Hospital Management System
+    </h1>
+
+    <p class="lead mt-3">
+        Book appointment with specialist doctors easily.
+    </p>
+
+    <!-- <a href="#" class="btn btn-success btn-lg mt-3">
+        Book Appointment
+    </a> -->
+
+    <div class="container my-5">
+
+    <h2 class="text-center mb-4">
+        Our Specializations
+    </h2>
+
+    <div class="row">
+
+        {% for category in categories %}
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card shadow-sm h-100">
+
+                <img src="{{ category.image.url }}"
+                     class="card-img-top"
+                     style="height:220px; object-fit:cover;">
+
+                <div class="card-body text-center">
+
+                    <h5>{{ category.name }}</h5>
+
+                    <a href="{% url 'doctor_list' category.id %}"
+                       class="btn btn-primary mt-2">
+                        View Doctors
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</div>
+
+{% endblock %}
