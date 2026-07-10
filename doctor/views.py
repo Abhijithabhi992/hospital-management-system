@@ -4,6 +4,9 @@ from django.shortcuts import render
 
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Doctor
+from django.conf import settings
+from django.http import HttpResponse
+import os
 
 def doctor_list(request, category_id):
 
@@ -26,3 +29,16 @@ def doctor_detail(request, doctor_id):
     }
 
     return render(request, 'doctor/doctor_detail.html', context)
+
+def check_media(request):
+    path = os.path.join(
+        settings.MEDIA_ROOT,
+        "categories",
+        "Screenshot_2026-07-02_192825.png"
+    )
+
+    return HttpResponse(f"""
+    MEDIA_ROOT = {settings.MEDIA_ROOT}<br>
+    Exists = {os.path.exists(path)}<br>
+    Path = {path}
+    """)
